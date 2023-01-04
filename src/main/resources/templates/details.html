@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+    <h1>Order for <span data-th-text="${order.customer_name}"></span></h1>
+    <br>
+    <h3>Insert order details below: </h3>
+    <form action="/order/details" method="post">
+        <table>
+            <tr>
+                <td>Product</td>
+                <td><input type="text" name="product"></td>
+            </tr>
+            <tr>
+                <td>Unit Price</td>
+                <td><input type="number" name="unit_price" step="0.01" min="0.01" max="9.99" value="5"></td>
+            </tr>
+            <tr>
+                <td>Discount</td>
+                <td><input type="number" name="discount" min="0" max="0.99" step="0.01" value = "0.2"></td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td><input type="number" name="quantity" min="1" value="1"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit">Add</button></td>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <td>Product</td>
+                <td>Unit Price</td>
+                <td>Discount</td>
+                <td>Quantity</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="od : ${details}">
+                <td><span data-th-text="${od.product}"></span></td>
+                <td><span data-th-text="${od.unit_price}"></span></td>
+                <td><span data-th-text="${od.discount}"></span></td>
+                <td><span data-th-text="${od.quantity}"></span></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <form action="/checkout" method="post">
+                <tr>
+                    <td><button type="submit">Checkout</button></td>
+                </tr>
+            </form>
+        </tfoot>
+    </table>
+</body>
+</html>
